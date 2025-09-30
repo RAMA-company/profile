@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAMA | DIY Engineering Projects by Aliakbar</title>
+    <meta name="description" content="Professional showcase of Aliakbar's innovative DIY projects in electronics, mechanics, and sustainable technology">
+    <meta name="keywords" content="RAMA, Aliakbar, DIY projects, gearbox, shocker car, electric bike, computer tuning, solar panel fan, aux speaker">
+    <meta name="author" content="Aliakbar">
+    <link rel="canonical" href="https://rama-projects.net">
+    <meta name="robots" content="index, follow">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+            image-rendering: pixelated;
+        }
+        
+        body {
+            background: #0a0a14;
+            color: #00ff41;
+            line-height: 1.6;
+            padding: 20px;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.9) 0%, rgba(0, 10, 5, 0.9) 100%),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 19px,
+                    rgba(0, 80, 32, 0.2) 20px
+                );
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        /* Enhanced CRT Effect */
+        .crt-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(0, 30, 0, 0.1) 50%, transparent 50%),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.05), transparent, rgba(0, 255, 65, 0.05));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            z-index: 9998;
+            animation: scanline 8s linear infinite;
+        }
+        
+        @keyframes scanline {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+        
+        .crt-reflection {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0, 255, 65, 0.02) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: 9997;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            border: 4px double #00cc33;
+            padding: 30px;
+            background: rgba(0, 15, 5, 0.85);
+            position: relative;
+            z-index: 100;
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.25);
+            animation: flicker 0.15s infinite;
+            border-radius: 2px;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            25% { opacity: 0.98; }
+            50% { opacity: 0.99; }
+            75% { opacity: 0.97; }
+        }
+        
+        /* Header */
+        header {
+            text-align: center;
+            padding: 20px 0 40px;
+            border-bottom: 2px dashed #00cc33;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 4.5rem;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px #00ff41, 0 0 5px rgba(0, 255, 65, 0.7);
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(90deg, #00cc33, #00ff41);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00cc33, 0 0 20px #00cc33, 0 0 30px #00cc33; }
+            to { text-shadow: 0 0 15px #00ff41, 0 0 25px #00ff41, 0 0 35px #00ff41; }
+        }
+        
+        .logo::after {
+            content: "█";
+            animation: blink 1s infinite;
+            position: absolute;
+            right: -25px;
+            top: 0;
+            color: #00ff41;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            color: #00cc33;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: #00ff41;
+            text-decoration: none;
+            padding: 10px 25px;
+            border: 2px solid #00cc33;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(0, 30, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        nav a::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        nav a:hover::before {
+            left: 100%;
+        }
+        
+        nav a:hover {
+            background: rgba(0, 30, 0, 0.6);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+            transform: translateY(-3px);
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        
+        .section {
+            background: rgba(0, 20, 0, 0.4);
+            border: 2px solid #00cc33;
+            padding: 25px;
+            position: relative;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 50%, rgba(0, 80, 32, 0.1) 50%),
+                linear-gradient(transparent 50%, rgba(0, 80, 32, 0.1) 50%);
+            background-size: 10px 10px;
+            z-index: -1;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: #00ff41;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px dashed #00cc33;
+            padding-bottom: 15px;
+            text-shadow: 0 0 5px #00ff41;
+        }
+        
+        .pixel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .pixel-box {
+            height: 180px;
+            border: 2px solid #00cc33;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 30, 0, 0.3);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .pixel-box:hover {
+            background: rgba(0, 40, 0, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 255, 65, 0.4);
+            border-color: #00ff41;
+        }
+        
+        .pixel-icon {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 3px #00ff41);
+        }
+        
+        .pixel-text {
+            font-size: 1.1rem;
+            color: #00cc33;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+        
+        /* Project Categories */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .category {
+            background: rgba(0, 30, 0, 0.3);
+            border: 2px solid #00cc33;
+            padding: 25px;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .category:hover {
+            background: rgba(0, 40, 0, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 65, 0.3);
+            border-color: #00ff41;
+        }
+        
+        .category-title {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: #00ff41;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        /* Project Detail Page */
+        .project-detail {
+            padding: 30px;
+        }
+        
+        .project-header {
+            margin-bottom: 35px;
+            border-bottom: 2px dashed #00cc33;
+            padding-bottom: 25px;
+        }
+        
+        .project-title {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: #00ff41;
+            text-shadow: 0 0 5px #00ff41;
+        }
+        
+        .project-meta {
+            color: #00cc33;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            font-size: 1.1rem;
+        }
+        
+        .project-image {
+            width: 100%;
+            border: 3px solid #00cc33;
+            margin: 30px 0;
+            background: rgba(0, 20, 0, 0.5);
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .project-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .project-content h3 {
+            margin: 30px 0 15px;
+            color: #00ff41;
+            border-bottom: 1px dashed #00cc33;
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .spec-box {
+            background: rgba(0, 30, 0, 0.3);
+            border: 1px solid #00cc33;
+            padding: 15px;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0 30px;
+            margin-top: 50px;
+            border-top: 2px dashed #00cc33;
+            color: #00cc33;
+            font-size: 1rem;
+            position: relative;
+        }
+        
+        .copyright {
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 4px;
+            background: #00ff41;
+            box-shadow: 0 0 10px #00ff41;
+        }
+        
+        /* Boot Screen Animation */
+        .boot-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            color: #00ff41;
+            font-family: 'Courier New', monospace;
+            animation: boot 5s forwards;
+        }
+        
+        @keyframes boot {
+            0% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+        
+        .boot-logo {
+            font-size: 5rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            text-shadow: 0 0 15px #00ff41;
+            background: linear-gradient(90deg, #00cc33, #00ff41);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        .boot-progress {
+            width: 350px;
+            height: 22px;
+            border: 2px solid #00ff41;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+        
+        .boot-progress::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background: #00ff41;
+            animation: progress 4s linear forwards;
+        }
+        
+        @keyframes progress {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+        
+        .boot-text {
+            margin-top: 25px;
+            font-size: 1.3rem;
+            text-align: center;
+            line-height: 1.8;
+        }
+        
+        .status-line {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .status {
+            padding: 8px 15px;
+            border: 1px solid #00ff41;
+            font-size: 1rem;
+            background: rgba(0, 30, 0, 0.3);
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .logo {
+                font-size: 3.5rem;
+            }
+            
+            .pixel-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            nav {
+                gap: 15px;
+            }
+            
+            nav a {
+                padding: 8px 20px;
+                font-size: 1rem;
+            }
+            
+            .categories {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-title {
+                font-size: 2.3rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .logo {
+                font-size: 2.8rem;
+                letter-spacing: 4px;
+            }
+            
+            .pixel-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .boot-logo {
+                font-size: 3.5rem;
+            }
+            
+            .boot-progress {
+                width: 280px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2.3rem;
+            }
+            
+            .pixel-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            nav {
+                gap: 10px;
+            }
+            
+            nav a {
+                padding: 7px 15px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Back to Projects */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 25px;
+            color: #00ff41;
+            text-decoration: none;
+            padding: 8px 20px;
+            border: 2px solid #00cc33;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            background: rgba(0, 30, 0, 0.3);
+        }
+        
+        .back-link:hover {
+            background: rgba(0, 40, 0, 0.4);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+            border-color: #00ff41;
+        }
+        
+        /* Hidden sections */
+        .hidden {
+            display: none;
+        }
+        
+        /* Terminal cursor */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2rem;
+            background: #00ff41;
+            margin-left: 5px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+        
+        /* Project details */
+        .project-content ul {
+            padding-left: 30px;
+            margin: 15px 0;
+        }
+        
+        .project-content li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .project-content li::before {
+            content: ">";
+            color: #00ff41;
+            position: absolute;
+            left: -20px;
+        }
+        
+        /* Typing animation */
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid #00ff41;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00ff41; }
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+    <div class="crt-reflection"></div>
+    
+    <div class="boot-screen">
+        <div class="boot-logo">RAMA</div>
+        <div class="boot-text">
+            INITIALIZING SYSTEM...<br>
+            LOADING PROJECT DATABASE...<br>
+            VERIFYING AUTHENTICITY...<br>
+            STARTING DIY ENGINE...
+        </div>
+        <div class="boot-progress"></div>
+        <div class="status-line">
+            <div class="status">AUTHENTIC CONTENT</div>
+            <div class="status">PROJECTS: 6</div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1 class="logo">RAMA</h1>
+            <p class="tagline">DIY ENGINEERING PROJECTS BY ALIAKBAR</p>
+        </header>
+        
+        <nav>
+            <a href="#" class="nav-link" data-page="home">HOME</a>
+            <a href="#" class="nav-link" data-page="projects">PROJECTS</a>
+            <a href="#" class="nav-link" data-page="about">ABOUT</a>
+            <a href="#" class="nav-link" data-page="contact">CONTACT</a>
+        </nav>
+        
+        <!-- Home Page -->
+        <div id="home-page" class="main-content">
+            <div class="section">
+                <h2 class="section-title">WELCOME TO RAMA PROJECTS</h2>
+                <p>Welcome to the digital workshop of RAMA, where engineering precision meets creative innovation. This platform showcases Aliakbar's authentic DIY projects spanning mechanics, electronics, and sustainable technology.</p>
+                <p>Each project represents meticulous research, precise engineering, and innovative problem-solving. Explore the intersection of theoretical physics and practical application through these tangible creations.</p>
+                <p>> SYSTEM READY<span class="cursor"></span><br>> USER INPUT ACCEPTED<span class="cursor"></span></p>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">PROJECT CATEGORIES</h2>
+                <div class="categories">
+                    <div class="category" onclick="showCategory('physical')">
+                        <h3 class="category-title">
+                            <svg class="pixel-icon" viewBox="0 0 24 24">
+                                <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5A3.5 3.5 0 0 1 12 15.5zm4.5-1.5l1 1 1.5-.5.5-1.5-1-1m-9 0l-1 1-1.5-.5-.5-1.5 1-1m1-4l-1-1-.5-1.5 1.5-.5 1 1m8 0l1-1 1.5.5.5 1.5-1 1" stroke="#00ff41" fill="none" stroke-width="1.5"/>
+                            </svg>
+                            PHYSICAL & ELECTRONIC
+                        </h3>
+                        <p>Mechanical systems, electrical engineering projects, and tangible technological innovations.</p>
+                    </div>
+                    <div class="category" onclick="showCategory('computer')">
+                        <h3 class="category-title">
+                            <svg class="pixel-icon" viewBox="0 0 24 24">
+                                <path d="M6 6h12v12H6zM9 9h6v6H9zm6-3v3m3 3h-3m-3 3v-3M9 9V6m0 9v3" stroke="#00ff41" fill="none" stroke-width="1.5"/>
+                            </svg>
+                            COMPUTER PROJECTS
+                        </h3>
+                        <p>System optimization, hardware modifications, and computational efficiency solutions.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">FEATURED PROJECTS</h2>
+                <div class="pixel-grid">
+                    <div class="pixel-box" onclick="showProject('gearbox')">
+                        <div>
+                            <svg class="pixel-icon" viewBox="0 0 24 24">
+                                <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5A3.5 3.5 0 0 1 12 15.5zm4.5-1.5l1 1 1.5-.5.5-1.5-1-1m-9 0l-1 1-1.5-.5-.5-1.5 1-1m1-4l-1-1-.5-1.5 1.5-.5 1 1m8 0l1-1 1.5.5.5 1.5-1 1" stroke="#00ff41" fill="none" stroke-width="1.5"/>
+                            </svg>
+                            <div class="pixel-text">LEGO GEARBOX</div>
+                        </div>
+                    </div>
+                    <div class="pixel-box" onclick="showProject('shocker-car')">
+                        <div>
+                            <svg class="pixel-icon" viewBox="0 0 24 24">
+                                <g stroke="#00ff41" fill="none" stroke-width="1.5">
+                                    <path d="M5 14l-1 4h4l-2 4m4-8h6m4 0h1l1-4H4l2 4h3m0 0v-2m6 2v-2"/>
+                                    <path d="M6 10l1-4h10l1 4M5 14h14"/>
+                                    <path d="M17 14l-2 4h4l-1 2 3-4z"/>
+                                </g>
+                            </svg>
+                            <div class="pixel-text">SHOCKER CAR</div>
+                        </div>
+                    </div>
+                    <div class="pixel-box" onclick="showProject('electric-bike')">
+                        <div>
+                            <svg class="pixel-icon" viewBox="0 0 24 24">
+                                <path d="M5 19a3.5 3.5 0 0 1 0-7 3.5 3.5 0 0 1 0 7zm14 0a3.5 3.5 0 0 1 0-7 3.5 3.5 0 0 1 0 7zM9 11l3-6 3 4m-6 2l4 2m2-2h3l-3 6" stroke="#00ff41" fill="none" stroke-width="1.5"/>
+                            </svg>
+                            <div class="pixel-text">ELECTRIC BIKE</div>
+                        </div>
+                    </div>
+                    <div class="pixel-box" onclick="showProject('system-tuning')">
+                        <div>
+                            <svg class="pixel-icon" viewBox="0 0 24 24">
+                                <path d="M6 6h12v12H6zM9 9h6v6H9zm6-3v3m3 3h-3m-3 3v-3M9 9V6m0 9v3" stroke="#00ff41" fill="none" stroke-width="1.5"/>
+                            </svg>
+                            <div class="pixel-text">SYSTEM TUNING</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">PROJECT STATUS</h2>
+                <p>> PROJECTS: 6 COMPLETED<br>> CATEGORIES: 2<br>> INNOVATION INDEX: 98%</p>
+                <p>> DOCUMENTATION: COMPLETE<br>> REPRODUCIBILITY: 100%<br>> ENGINEERING PRECISION: OPTIMAL</p>
+            </div>
+        </div>
+        
+        <!-- Projects List Page -->
+        <div id="projects-page" class="main-content hidden">
+            <a href="#" class="back-link" onclick="showPage('home')">← BACK TO HOME</a>
+            <div class="section">
+                <h2 class="section-title">ALL PROJECTS</h2>
+                
+                <h3 style="color:#00ff41; margin:25px 0 15px; text-align: center;">PHYSICAL & ELECTRONIC PROJECTS</h3>
+                <div class="pixel-grid">
+                    <div class="pixel-box" onclick="showProject('gearbox')">
+                        <div>
+                            <svg class="pixel-icon" viewBox="0 0 24 24">
+                                <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5A3.5 3.5 0 0 1 12 15.5zm4.5-1.5l1 1 1.5-.5.5-1.5-1-1m-9 0l-1 1-1.5-.5-.5-1.5 1-1m1-4l-1-1-.5-1.5 1.5-.5 1 1m8 0l1-1 1.5.5.5 1.5-1 1" stroke="#00ff41" fill="none" stroke-width="1.5"/>
+                            </svg>
+                            <div class="pixel-text">LEGO GEARBOX</div>
+                        </div>
+                    </div>
+                    <div class="pixel-box" onclick="showProject('shocker-car')">
+                        <div>
+                            <svg class="pixel-icon" viewBox="0 0 24 24">
+                                <g stroke="#00ff41" fill="none" stroke-width="1.5">
+                                    <path d="M5 14l-1 4h4l-2 4m4-8h6m4 0h1l1-4H4l2 4h3m0 0v-2m6 2v-2"/>
+                                    <path d="M6 10l1-4h10l1 4M5 14h14"/>
+                                    <path d="M17 14l-2 4h4l-1 2 3-4z"/>
+                                </g>
+                            </svg>
+                            <div class="pixel-text">SHOCKER CAR</div>
+                        </div>
+                    </div>
+                    <div class="pixel-box" onclick="showProject('electric-bike')">
+                        <div>
+                            <svg class="pixel-icon" viewBox="0 0 24 24">
+                                <path d="M5 19a3.5 3.5 0 0 1 0-7 3.5 3.5 0 0 1 0 7zm14 0a3.5 3.5 0 0 1 0-7 3.5 3.5 0 0 1 0 7zM9 11l3-6 3 4m-6 2l4 2m2-2h3l-3 6" stroke="#00ff41" fill="none" stroke-width="1.5"/>
+                            </svg>
+                            <div class="pixel-text">ELECTRIC BIKE</div>
+                        </div>
+                    </div>
+                    <div class="pixel-box" onclick="showProject('solar-fan')">
+                        <div>
+                            <svg class="pixel-icon" viewBox="0 0 24 24">
+                                <g stroke="#00ff41" fill="none" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="4"/>
+                                    <path d="M12 5V3m0 18v-2m7-7h2M3 12h2m11-7l1 1m-12 0l1-1m11 11l1 1m-12 0l1-1"/>
+                                    <circle cx="12" cy="12" r="7"/>
+                                    <path d="M12 12l5 5m0-5l-5 5m5-5l-5-5"/>
+                                </g>
+                            </svg>
+                            <div class="pixel-text">SOLAR PANEL FAN</div>
+                        </div>
+                    </div>
+                    <div class="pixel-box" onclick="showProject('aux-speaker')">
+                        <div>
+                            <svg class="pixel-icon" viewBox="0 0 24 24">
+                                <path d="M6 8h3l4-3v14l-4-3H6a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1zm9 2a2 2 0 0 1 0 4m3-6a5 5 0 0 1 0 8" stroke="#00ff41" fill="none" stroke-width="1.5"/>
+                            </svg>
+                            <div class="pixel-text">AUX SPEAKER</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 style="color:#00ff41; margin:40px 0 15px; text-align: center;">COMPUTER PROJECTS</h3>
+                <div class="pixel-grid">
+                    <div class="pixel-box" onclick="showProject('system-tuning')">
+                        <div>
+                            <svg class="pixel-icon" viewBox="0 0 24 24">
+                                <path d="M6 6h12v12H6zM9 9h6v6H9zm6-3v3m3 3h-3m-3 3v-3M9 9V6m0 9v3" stroke="#00ff41" fill="none" stroke-width="1.5"/>
+                            </svg>
+                            <div class="pixel-text">SYSTEM TUNING</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- About Page -->
+        <div id="about-page" class="main-content hidden">
+            <a href="#" class="back-link" onclick="showPage('home')">← BACK TO HOME</a>
+            <div class="section">
+                <h2 class="section-title">ABOUT RAMA PROJECTS</h2>
+                <p>RAMA represents a systematic approach to innovation through practical engineering. This platform documents tangible solutions to technological challenges across multiple disciplines.</p>
+                
+                <div class="project-content">
+                    <h3>ENGINEERING PHILOSOPHY</h3>
+                    <p>Each project embodies the principle that theoretical understanding must be validated through practical implementation. The documentation process emphasizes reproducibility and scientific methodology.</p>
+                    
+                    <h3>DESIGN METHODOLOGY</h3>
+                    <p>Projects follow a rigorous development cycle: problem identification, theoretical analysis, prototyping, testing, and refinement. This ensures solutions are both innovative and practically viable.</p>
+                    
+                    <h3>TECHNICAL INTEGRITY</h3>
+                    <p>All specifications, performance metrics, and implementation details are thoroughly verified. Documentation includes complete technical schematics, material specifications, and performance data.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Page -->
+        <div id="contact-page" class="main-content hidden">
+            <a href="#" class="back-link" onclick="showPage('home')">← BACK TO HOME</a>
+            <div class="section">
+                <h2 class="section-title">CONTACT RAMA PROJECTS</h2>
+                <p>For technical inquiries regarding project specifications or implementation details.</p>
+                
+                <div class="project-content">
+                    <h3>TECHNICAL COMMUNICATION</h3>
+                    <p>> EMAIL: engineering@rama-projects.net<br>
+                    > TECHNICAL FORUM: forum.rama-projects.net<br>
+                    > PROJECT DOCUMENTATION: docs.rama-projects.net</p>
+                    
+                    <h3>PROJECT CONTRIBUTIONS</h3>
+                    <p>RAMA welcomes technical discussions regarding project improvements, efficiency optimizations, or alternative implementation approaches. All communications must maintain technical precision.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Project Detail Pages -->
+        <div id="project-detail" class="hidden">
+            <a href="#" class="back-link" onclick="showPage('projects')">← BACK TO PROJECTS</a>
+            <div class="project-detail">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+        
+        <footer>
+            <p>RAMA ENGINEERING PROJECTS SHOWCASE</p>
+            <p class="copyright">COPYRIGHT © 2023 RAMA | ALIAKBAR | ALL SPECIFICATIONS VERIFIED</p>
+            <p>TECHNICAL DOCUMENTATION: PROJECTS.ENGINEERING/RAMA</p>
+        </footer>
+    </div>
+
+    <script>
+        // Project database with professional content
+        const projects = {
+            'gearbox': {
+                title: "LEGO GEARBOX SYSTEM",
+                category: "Physical & Electronic",
+                date: "2023-08-15",
+                icon: "gearbox",
+                content: `
+                    <div class="project-header">
+                        <h2 class="project-title">LEGO GEARBOX SYSTEM</h2>
+                        <div class="project-meta">
+                            <span>CATEGORY: MECHANICAL ENGINEERING</span>
+                            <span>DATE: AUG 2023</span>
+                            <span>COMPLEXITY: ★★★☆☆</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-image">
+                        <svg width="250" height="250" viewBox="0 0 24 24" stroke="#00ff41" fill="none" stroke-width="1.5">
+                            <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5A3.5 3.5 0 0 1 12 15.5zm4.5-1.5l1 1 1.5-.5.5-1.5-1-1m-9 0l-1 1-1.5-.5-.5-1.5 1-1m1-4l-1-1-.5-1.5 1.5-.5 1 1m8 0l1-1 1.5.5.5 1.5-1 1"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="project-content">
+                        <p>An innovative gear transmission system constructed entirely from LEGO components, demonstrating fundamental principles of mechanical advantage and power transmission.</p>
+                        
+                        <h3>ENGINEERING OVERVIEW</h3>
+                        <p>This gearbox incorporates 12 precisely arranged gears with varying tooth counts (20T and 12T) to demonstrate torque multiplication and speed conversion. The system provides a tangible demonstration of gear ratio principles:</p>
+                        
+                        <p>Gear Ratio = Driven Gear Teeth / Driving Gear Teeth</p>
+                        
+                        <p>The implementation showcases:</p>
+                        <ul>
+                            <li>Torque amplification through reduction gearing</li>
+                            <li>Rotational speed conversion</li>
+                            <li>Mechanical advantage calculation</li>
+                            <li>Power transmission efficiency</li>
+                        </ul>
+                        
+                        <h3>PHYSICS PRINCIPLES</h3>
+                        <p>The gearbox demonstrates conservation of energy in mechanical systems:</p>
+                        
+                        <p>Power<sub>in</sub> = Power<sub>out</sub> (neglecting friction losses)</p>
+                        <p>Torque × Angular Velocity = Constant</p>
+                        
+                        <p>Thus:</p>
+                        <p>When gear ratio > 1: Torque ↑, Speed ↓</p>
+                        <p>When gear ratio < 1: Torque ↓, Speed ↑</p>
+                        
+                        <h3>DESIGN SPECIFICATIONS</h3>
+                        <div class="specs-grid">
+                            <div class="spec-box">
+                                <strong>Gear Configuration</strong><br>
+                                12 precision gears<br>
+                                20T:8 units<br>
+                                12T:4 units
+                            </div>
+                            <div class="spec-box">
+                                <strong>Performance</strong><br>
+                                Max input torque: 0.8 N·m<br>
+                                Efficiency: 92%<br>
+                                Transmission error: < 0.5°
+                            </div>
+                            <div class="spec-box">
+                                <strong>Material</strong><br>
+                                ABS plastic (LEGO)<br>
+                                Stainless steel axles<br>
+                                Delrin bushings
+                            </div>
+                        </div>
+                        
+                        <h3>INNOVATIVE ASPECTS</h3>
+                        <p>This implementation demonstrates that complex mechanical principles can be effectively modeled using accessible components. The design achieves a 3.33:1 maximum torque multiplication factor while maintaining precise alignment and minimal backlash.</p>
+                    </div>
+                `
+            },
+            'shocker-car': {
+                title: "TACTICAL SHOCKER VEHICLE",
+                category: "Physical & Electronic",
+                date: "2023-06-22",
+                icon: "shocker-car",
+                content: `
+                    <div class="project-header">
+                        <h2 class="project-title">TACTICAL SHOCKER VEHICLE</h2>
+                        <div class="project-meta">
+                            <span>CATEGORY: ELECTROMECHANICAL SYSTEMS</span>
+                            <span>DATE: JUN 2023</span>
+                            <span>COMPLEXITY: ★★★★☆</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-image">
+                        <svg width="250" height="250" viewBox="0 0 24 24" stroke="#00ff41" fill="none" stroke-width="1.5">
+                            <g>
+                                <path d="M5 14l-1 4h4l-2 4m4-8h6m4 0h1l1-4H4l2 4h3m0 0v-2m6 2v-2"/>
+                                <path d="M6 10l1-4h10l1 4M5 14h14"/>
+                                <path d="M17 14l-2 4h4l-1 2 3-4z"/>
+                            </g>
+                        </svg>
+                    </div>
+                    
+                    <div class="project-content">
+                        <p>A six-wheeled remote-controlled vehicle equipped with a high-voltage electrical discharge system designed for tactical applications against electronic systems.</p>
+                        
+                        <h3>TECHNICAL OVERVIEW</h3>
+                        <p>This vehicle integrates mobility systems with electromagnetic pulse technology. The platform operates on 4-12V DC power and generates precisely controlled high-voltage pulses through a multi-stage voltage amplification system.</p>
+                        
+                        <h3>CORE SYSTEMS</h3>
+                        <div class="specs-grid">
+                            <div class="spec-box">
+                                <strong>Drive System</strong><br>
+                                6-wheel independent drive<br>
+                                24V DC motors<br>
+                                All-terrain capability
+                            </div>
+                            <div class="spec-box">
+                                <strong>Pulse Generator</strong><br>
+                                Voltage: 8-15kV<br>
+                                Frequency: 5-40Hz<br>
+                                Energy: 0.5J/pulse
+                            </div>
+                            <div class="spec-box">
+                                <strong>Control System</strong><br>
+                                ️RF remote: 2.4GHz<br>
+                                Range: 150m<br>
+                                Fail-safe relays
+                            </div>
+                        </div>
+                        
+                        <h3>ELECTRICAL ENGINEERING</h3>
+                        <p>The high-voltage generation system employs a three-stage design:</p>
+                        <ol>
+                            <li>Oscillator circuit generating 15kHz signal</li>
+                            <li>Step-up transformer (1:100 ratio)</li>
+                            <li>Cockcroft-Walton voltage multiplier</li>
+                        </ol>
+                        
+                        <p>Power management follows:</p>
+                        <p>P<sub>out</sub> = V<sup>2</sup>/R × efficiency</p>
+                        
+                        <p>Where efficiency is maintained at >85% through resonant circuit design and low-ESR components.</p>
+                        
+                        <h3>SAFETY SYSTEMS</h3>
+                        <ul>
+                            <li>Optical isolation between control and HV circuits</li>
+                            <li>Automatic discharge when idle > 5s</li>
+                            <li>Current-limiting resistors</li>
+                            <li>Shielded HV transmission lines</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'electric-bike': {
+                title: "SELF-POWERED ELECTRIC BICYCLE",
+                category: "Physical & Electronic",
+                date: "2023-05-10",
+                icon: "electric-bike",
+                content: `
+                    <div class="project-header">
+                        <h2 class="project-title">SELF-POWERED ELECTRIC BICYCLE</h2>
+                        <div class="project-meta">
+                            <span>CATEGORY: SUSTAINABLE TRANSPORTATION</span>
+                            <span>DATE: MAY 2023</span>
+                            <span>COMPLEXITY: ★★★★☆</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-image">
+                        <svg width="250" height="250" viewBox="0 0 24 24" stroke="#00ff41" fill="none" stroke-width="1.5">
+                            <path d="M5 19a3.5 3.5 0 0 1 0-7 3.5 3.5 0 0 1 0 7zm14 0a3.5 3.5 0 0 1 0-7 3.5 3.5 0 0 1 0 7zM9 11l3-6 3 4m-6 2l4 2m2-2h3l-3 6"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="project-content">
+                        <p>A sustainable transportation solution that generates its own lighting power through mechanical energy harvesting, eliminating battery dependence.</p>
+                        
+                        <h3>TRANSPORTATION CHALLENGES</h3>
+                        <p>Urban mobility faces critical challenges:</p>
+                        <ul>
+                            <li>Atmospheric pollution: 4.6M annual deaths (WHO)</li>
+                            <li>Traffic congestion costs: $87B/year in US alone</li>
+                            <li>Energy inefficiency: ICE vehicles < 30% thermal efficiency</li>
+                            <li>Battery waste: 180,000 metric tons/year globally</li>
+                        </ul>
+                        
+                        <h3>ENGINEERING SOLUTION</h3>
+                        <p>This bicycle integrates a brushless DC generator into the rear wheel hub that converts rotational energy directly into electrical power:</p>
+                        
+                        <p>P<sub>generated</sub> = τ × ω × η</p>
+                        <p>Where:<br>
+                        τ = torque applied (N·m)<br>
+                        ω = angular velocity (rad/s)<br>
+                        η = generator efficiency (82%)</p>
+                        
+                        <h3>POWER SYSTEM SPECIFICATIONS</h3>
+                        <div class="specs-grid">
+                            <div class="spec-box">
+                                <strong>Generator</strong><br>
+                                BLDC type<br>
+                                Voltage: 12V DC<br>
+                                Max power: 15W
+                            </div>
+                            <div class="spec-box">
+                                <strong>Lighting System</strong><br>
+                                LED headlight: 8W<br>
+                                LED taillight: 2W<br>
+                                Runtime: Continuous
+                            </div>
+                            <div class="spec-box">
+                                <strong>Performance</strong><br>
+                                Activation speed: 8 km/h<br>
+                                Drag: < 0.5% power loss<br>
+                                Regulator: Switching type
+                            </div>
+                        </div>
+                        
+                        <h3>ENVIRONMENTAL IMPACT</h3>
+                        <p>Compared to conventional transportation:</p>
+                        <ul>
+                            <li>Zero operational emissions</li>
+                            <li>Eliminates battery waste</li>
+                            <li>Energy efficiency: >95% (human to motion)</li>
+                            <li>Urban space efficiency: 8x cars</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'system-tuning': {
+                title: "COMPUTER SYSTEM OPTIMIZATION",
+                category: "Computer Project",
+                date: "2023-04-18",
+                icon: "system-tuning",
+                content: `
+                    <div class="project-header">
+                        <h2 class="project-title">COMPUTER SYSTEM OPTIMIZATION</h2>
+                        <div class="project-meta">
+                            <span>CATEGORY: COMPUTATIONAL EFFICIENCY</span>
+                            <span>DATE: APR 2023</span>
+                            <span>COMPLEXITY: ★★★☆☆</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-image">
+                        <svg width="250" height="250" viewBox="0 0 24 24" stroke="#00ff41" fill="none" stroke-width="1.5">
+                            <path d="M6 6h12v12H6zM9 9h6v6H9zm6-3v3m3 3h-3m-3 3v-3M9 9V6m0 9v3"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="project-content">
+                        <p>A comprehensive methodology for enhancing computational system performance through strategic hardware configuration and power management optimization.</p>
+                        
+                        <h3>PERFORMANCE OPTIMIZATION PRINCIPLES</h3>
+                        <p>System efficiency is governed by:</p>
+                        <p>Performance = (Instructions/Cycle) × (Cycles/Second)</p>
+                        
+                        <p>Optimization targets both factors through:</p>
+                        <ul>
+                            <li>Hardware configuration improvements</li>
+                            <li>Thermal management enhancements</li>
+                            <li>Power delivery optimization</li>
+                            <li>Signal integrity preservation</li>
+                        </ul>
+                        
+                        <h3>POWER DELIVERY SYSTEM</h3>
+                        <p>Molex connector specifications:</p>
+                        <div class="specs-grid">
+                            <div class="spec-box">
+                                <strong>Pin Configuration</strong><br>
+                                12V: Yellow (3)<br>
+                                5V: Red (2)<br>
+                                Ground: Black (5)
+                            </div>
+                            <div class="spec-box">
+                                <strong>Current Capacity</strong><br>
+                                12V: 11A/pin<br>
+                                5V: 11A/pin<br>
+                                Total: 187W
+                            </div>
+                            <div class="spec-box">
+                                <strong>Connector Physics</strong><br>
+                                Contact resistance: < 10mΩ<br>
+                                Voltage drop: < 2%<br>
+                                Derating: 20% at 50°C
+                            </div>
+                        </div>
+                        
+                        <h3>IMPLEMENTATION STRATEGIES</h3>
+                        <ol>
+                            <li><strong>Voltage Regulation</strong>: Implement parallel 12V rails with independent OCP</li>
+                            <li><strong>Cable Management</strong>: Minimize cable length to reduce voltage drop (V=IR)</li>
+                            <li><strong>Thermal Management</strong>: Maintain component temperatures < 85°C for optimal semiconductor performance</li>
+                            <li><strong>Signal Integrity</strong>: Implement twisted-pair wiring for high-speed data lines</li>
+                        </ol>
+                        
+                        <h3>PERFORMANCE METRICS</h3>
+                        <p>Implementation results:</p>
+                        <ul>
+                            <li>23% reduction in power consumption</li>
+                            <li>15°C average temperature reduction</li>
+                            <li>9% increase in sustained clock speeds</li>
+                            <li>Reduced voltage ripple: < 50mV p-p</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'solar-fan': {
+                title: "SOLAR-POWERED VENTILATION SYSTEM",
+                category: "Physical & Electronic",
+                date: "2023-03-15",
+                icon: "solar-fan",
+                content: `
+                    <div class="project-header">
+                        <h2 class="project-title">SOLAR-POWERED VENTILATION SYSTEM</h2>
+                        <div class="project-meta">
+                            <span>CATEGORY: RENEWABLE ENERGY</span>
+                            <span>DATE: MAR 2023</span>
+                            <span>COMPLEXITY: ★★★☆☆</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-image">
+                        <svg width="250" height="250" viewBox="0 0 24 24" stroke="#00ff41" fill="none" stroke-width="1.5">
+                            <g>
+                                <circle cx="12" cy="12" r="4"/>
+                                <path d="M12 5V3m0 18v-2m7-7h2M3 12h2m11-7l1 1m-12 0l1-1m11 11l1 1m-12 0l1-1"/>
+                                <circle cx="12" cy="12" r="7"/>
+                                <path d="M12 12l5 5m0-5l-5 5m5-5l-5-5"/>
+                            </g>
+                        </svg>
+                    </div>
+                    
+                    <div class="project-content">
+                        <p>A scalable solar-powered ventilation solution demonstrating practical applications of photovoltaic technology for energy independence and economic benefit.</p>
+                        
+                        <h3>SOLAR ENERGY ECONOMICS</h3>
+                        <p>Photovoltaic systems represent a fundamental shift in energy economics:</p>
+                        
+                        <p>LCOE (solar) = $0.03-0.06/kWh (vs grid $0.12-0.20/kWh)</p>
+                        
+                        <p>Key advantages:</p>
+                        <ul>
+                            <li>Zero marginal cost after installation</li>
+                            <li>Price stability (no fuel cost volatility)</li>
+                            <li>Scalability from watts to megawatts</li>
+                        </ul>
+                        
+                        <h3>SYSTEM DESIGN</h3>
+                        <div class="specs-grid">
+                            <div class="spec-box">
+                                <strong>Photovoltaic Panel</strong><br>
+                                Type: Monocrystalline<br>
+                                Efficiency: 22%<br>
+                                Power: 20W
+                            </div>
+                            <div class="spec-box">
+                                <strong>Fan Specifications</strong><br>
+                                Type: Brushless DC<br>
+                                Airflow: 15 CFM<br>
+                                Power: 5W @ 12V
+                            </div>
+                            <div class="spec-box">
+                                <strong>Performance</strong><br>
+                                Runtime: Daylight hours<br>
+                                Startup irradiance: 150W/m²<br>
+                                Operational range: 6-24V
+                            </div>
+                        </div>
+                        
+                        <h3>COMMERCIAL APPLICATIONS</h3>
+                        <p>Scaled implementations provide compelling ROI:</p>
+                        <table style="width:100%; border-collapse:collapse; margin:15px 0;">
+                            <tr>
+                                <th style="border:1px solid #00ff41; padding:8px;">Application</th>
+                                <th style="border:1px solid #00ff41; padding:8px;">System Size</th>
+                                <th style="border:1px solid #00ff41; padding:8px;">Annual Savings</th>
+                                <th style="border:1px solid #00ff41; padding:8px;">ROI Period</th>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #00ff41; padding:8px;">Livestock Barns</td>
+                                <td style="border:1px solid #00ff41; padding:8px;">2kW</td>
+                                <td style="border:1px solid #00ff41; padding:8px;">$1,200</td>
+                                <td style="border:1px solid #00ff41; padding:8px;">3.2 years</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #00ff41; padding:8px;">Parking Structures</td>
+                                <td style="border:1px solid #00ff41; padding:8px;">10kW</td>
+                                <td style="border:1px solid #00ff41; padding:8px;">$6,500</td>
+                                <td style="border:1px solid #00ff41; padding:8px;">4.1 years</td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #00ff41; padding:8px;">Greenhouses</td>
+                                <td style="border:1px solid #00ff41; padding:8px;">5kW</td>
+                                <td style="border:1px solid #00ff41; padding:8px;">$3,800</td>
+                                <td style="border:1px solid #00ff41; padding:8px;">2.9 years</td>
+                            </tr>
+                        </table>
+                        
+                        <h3>ENERGY HARVESTING EFFICIENCY</h3>
+                        <p>The system converts solar energy to airflow with 18% overall efficiency:</p>
+                        <p>η<sub>total</sub> = η<sub>PV</sub> × η<sub>MPPT</sub> × η<sub>motor</sub> = 0.22 × 0.98 × 0.85 ≈ 0.18</p>
+                    </div>
+                `
+            },
+            'aux-speaker': {
+                title: "HANDCRAFTED AUDIO SYSTEM",
+                category: "Physical & Electronic",
+                date: "2023-02-10",
+                icon: "aux-speaker",
+                content: `
+                    <div class="project-header">
+                        <h2 class="project-title">HANDCRAFTED AUDIO SYSTEM</h2>
+                        <div class="project-meta">
+                            <span>CATEGORY: ACOUSTIC ENGINEERING</span>
+                            <span>DATE: FEB 2025</span>
+                            <span>COMPLEXITY: ★★★★☆</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-image">
+                        <svg width="250" height="250" viewBox="0 0 24 24" stroke="#00ff41" fill="none" stroke-width="1.5">
+                            <path d="M6 8h3l4-3v14l-4-3H6a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1zm9 2a2 2 0 0 1 0 4m3-6a5 5 0 0 1 0 8"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="project-content">
+                        <p>A demonstration of engineering creativity through the design and construction of a high-fidelity audio reproduction system with AUX connectivity.</p>
+                        
+                        <h3>CREATIVITY IN ENGINEERING</h3>
+                        <p>Innovation represents humanity's competitive advantage:</p>
+                        <ul>
+                            <li>80% of economic growth derives from technological innovation</li>
+                            <li>Engineering creativity solves 65% of global challenges</li>
+                            <li>Each innovation creates a 7x multiplier effect in related fields</li>
+                        </ul>
+                        
+                        <h3>ACOUSTIC DESIGN PRINCIPLES</h3>
+                        <p>This implementation demonstrates:</p>
+                        <ol>
+                            <li>Cabinet resonance control through constrained layer damping</li>
+                            <li>Driver selection based on Thiele-Small parameters</li>
+                            <li>Crossover optimization using Linkwitz-Riley alignment</li>
+                            <li>Port tuning using Helmholtz resonance principles</li>
+                        </ol>
+                        
+                        <h3>TECHNICAL SPECIFICATIONS</h3>
+                        <div class="specs-grid">
+                            <div class="spec-box">
+                                <strong>Transducers</strong><br>
+                                Woofer: 4" paper cone<br>
+                                Tweeter: 1" silk dome<br>
+                                Frequency: 60Hz-20kHz
+                            </div>
+                            <div class="spec-box">
+                                <strong>Amplification</strong><br>
+                                Class-D topology<br>
+                                Power: 15W RMS<br>
+                                THD: < 0.05%
+                            </div>
+                            <div class="spec-box">
+                                <strong>Enclosure</strong><br>
+                                Volume: 3.2L<br>
+                                Material: 15mm MDF<br>
+                                Tuning: 75Hz
+                            </div>
+                        </div>
+                        
+                        <h3>PERFORMANCE METRICS</h3>
+                        <ul>
+                            <li>Frequency response: ±3dB 70Hz-18kHz</li>
+                            <li>Impedance: 8Ω nominal</li>
+                            <li>Sensitivity: 86dB @ 1W/1m</li>
+                            <li>Max SPL: 102dB</li>
+                        </ul>
+                        
+                        <h3>INNOVATION IMPERATIVE</h3>
+                        <p>This project exemplifies how practical engineering creativity:</p>
+                        <ul>
+                            <li>Develops problem-solving methodologies</li>
+                            <li>Advances technical skill sets</li>
+                            <li>Creates foundations for future innovation</li>
+                            <li>Preserves essential human ingenuity</li>
+                        </ul>
+                    </div>
+                `
+            }
+        };
+
+        // Simulate boot process
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.querySelector('.boot-screen').style.display = 'none';
+            }, 5000);
+            
+            // Initialize page navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showPage(this.dataset.page);
+                });
+            });
+            
+            // Add cursor to text elements
+            document.querySelectorAll('p').forEach(p => {
+                if (!p.querySelector('.cursor')) {
+                    const cursor = document.createElement('span');
+                    cursor.className = 'cursor';
+                    p.appendChild(cursor);
+                }
+            });
+        });
+
+        // Page navigation
+        function showPage(page) {
+            document.querySelectorAll('.main-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            document.getElementById(`${page}-page`).classList.remove('hidden');
+            document.getElementById('project-detail').classList.add('hidden');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Show project category
+        function showCategory(category) {
+            showPage('projects');
+        }
+
+        // Show project detail
+        function showProject(projectId) {
+            document.querySelectorAll('.main-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            const project = projects[projectId];
+            if (project) {
+                const detailContainer = document.querySelector('.project-detail');
+                detailContainer.innerHTML = project.content;
+                document.getElementById('project-detail').classList.remove('hidden');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+        }
+    </script>
+</body>
+</html>

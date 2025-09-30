@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EUR/USD trading history with psychological insights - 3 months of trading data">
+    <title>EUR/USD Trading History | Professional Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #121212;
+            --card-bg: #1a1a1a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --accent: #ffffff;
+            --accent-soft: #4a4a4a;
+            --border-radius: 16px;
+            --box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--accent-soft);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            background: var(--accent);
+            color: var(--primary-bg);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: var(--box-shadow);
+            transform: rotate(-5deg);
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, #ccc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .download-btn {
+            background: linear-gradient(to right, #333, #000);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid #333;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .download-btn i {
+            font-size: 18px;
+        }
+
+        .page-title {
+            font-size: 42px;
+            text-align: center;
+            margin: 40px 0;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            background: linear-gradient(to right, #fff, #aaa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid #2a2a2a;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 15px 0;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .trade-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid #2a2a2a;
+        }
+
+        .trade-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .image-container {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2c2c2c, #1f1f1f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .image-placeholder i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #3a3a3a;
+        }
+
+        .trade-details {
+            padding: 20px;
+        }
+
+        .trade-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .trade-date {
+            background: #333;
+            color: var(--text-secondary);
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .psychology-tip {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+            border-left: 3px solid var(--accent);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .tip-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--accent-soft);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 32px;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        /* 3D Effects */
+        .stat-card, .trade-card {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+
+        .stat-value, .trade-title {
+            transform: translateZ(20px);
+        }
+
+        /* Soft corners */
+        .stat-card, .trade-card, .download-btn, .image-container {
+            border-radius: var(--border-radius);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">T</div>
+                <div class="logo-text">EUR/USD TRADER</div>
+            </div>
+			<a href="RESULT.xlsx">
+            <button class="download-btn">
+                <i class="fas fa-download"></i> Download Excel Report
+            </button>
+			</a>
+        </header>
+
+        <h1 class="page-title">Trading History Dashboard</h1>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-label">Total Trades</div>
+                <div class="stat-value">22</div>
+                <div class="stat-label">Last 3 Months</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Win Rate</div>
+                <div class="stat-value">77.27%</div>
+                <div class="stat-label">EUR/USD Only</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Risk-Reward</div>
+                <div class="stat-value">1:2</div>
+                <div class="stat-label">All Trades</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Profit Factor</div>
+                <div class="stat-value">2.1</div>
+                <div class="stat-label">Consistent Results</div>
+            </div>
+        </div>
+
+        <div class="gallery">
+            <!-- Trade History Items (20 trades) -->
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div><img>assests/images/eurusd-trade-01.jpg</img></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                        Breakout Trade
+                        
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                             Patience pays
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-02.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                        Reversal Trade
+                        
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                          Stick to the plan
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-03.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                         Trend Following
+                 
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                          Trust your analysis
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-04.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                       Support Break
+                      
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                           Manage emotions
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-05.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                       Bullish Engulfing
+                    
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                            <i class="fas fa-brain"></i> Focus on process
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-06.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                      Resistance Reject
+                     
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                            <i class="fas fa-brain"></i> Stay disciplined
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-07.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                      Flag Pattern
+                     
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                            <i class="fas fa-brain"></i> Process > outcome
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-08.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                        Double Top
+                     
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                            <i class="fas fa-brain"></i> Trade your plan
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-09.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                         Breakout Retest
+                      
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                            <i class="fas fa-brain"></i> Control risk first
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-10.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                         Trend Reversal
+                     
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                            <i class="fas fa-brain"></i> Embrace uncertainty
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-11.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                        Bullish Divergence
+                      
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                            <i class="fas fa-brain"></i> Stay present
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-12.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                    Bearish Engulfing
+                     
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                            <i class="fas fa-brain"></i> Focus on execution
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-13.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                        Channel Breakout
+                       
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                            <i class="fas fa-brain"></i> Trust the process
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-14.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                         Head & Shoulders
+                 
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                            <i class="fas fa-brain"></i> Manage expectations
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-15.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                         Bull Flag
+                  
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                            <i class="fas fa-brain"></i> Trade objectively
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-16.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                         Triangle Break
+                
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                            <i class="fas fa-brain"></i> Accept outcomes
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-17.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                         Support Bounce
+                      
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                            <i class="fas fa-brain"></i> Stay consistent
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-18.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                         Trend Continuation
+                       
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                            <i class="fas fa-brain"></i> Patience is key
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-19.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                        <i class="fas fa-arrow-up"></i> Bullish Momentum
+                       
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                            <i class="fas fa-brain"></i> Focus on edges
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trade-card">
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div>
+                            <i class="fas fa-chart-line"></i>
+                            <div>eurusd-trade-20.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trade-details">
+                    <h3 class="trade-title">
+                        <i class="fas fa-arrow-down"></i> Reversal Signal
+                       
+                    </h3>
+                    <div class="psychology-tip">
+                        <div class="tip-title">
+                            <i class="fas fa-brain"></i> Manage risk first
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>EUR/USD Trading History | Last Updated: July 9, 2023</p>
+            <p>Data reflects 20 trades from April 1, 2023 to June 30, 2023</p>
+            <p>© 2023 Trading Analytics. All trades executed with 1:2 risk-reward ratio.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add subtle interactive effects
+        document.querySelectorAll('.trade-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const angleY = (x - centerX) / 20;
+                const angleX = (centerY - y) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateZ(20px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            });
+        });
+    </script>
+</body>
+</html>

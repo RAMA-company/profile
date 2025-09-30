@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رزومه حرفه‌ای | متخصص چندبعدی</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a237e;
+            --secondary: #4a148c;
+            --accent: #ff4081;
+            --light: #f5f5f5;
+            --dark: #263238;
+            --success: #00c853;
+            --warning: #ffab00;
+            --gradient-start: #1a237e;
+            --gradient-end: #6a1b9a;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', 'Noto Nastaliq Urdu', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            color: #333;
+            line-height: 1.7;
+            direction: rtl;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 40px;
+            z-index: 1;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: -1;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            color: white;
+            letter-spacing: -0.5px;
+        }
+        
+        .title {
+            font-size: 1.6rem;
+            font-weight: 300;
+            margin-bottom: 25px;
+            opacity: 0.92;
+            color: rgba(255, 255, 255, 0.95);
+        }
+        
+        .bio {
+            max-width: 800px;
+            margin: 25px auto 15px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 15px;
+            backdrop-filter: blur(12px);
+            font-size: 1.15rem;
+            line-height: 1.9;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px 25px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+        }
+        
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+        
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 35px;
+            margin: 30px 0;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            position: relative;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            right: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .section-title i {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 25px;
+        }
+        
+        .skill-category {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 25px;
+            transition: var(--transition);
+            border-left: 5px solid var(--accent);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-category::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 18px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .skill-level {
+            display: flex;
+            margin-bottom: 20px;
+            padding: 5px 0;
+        }
+        
+        .level-dot {
+            width: 22px;
+            height: 22px;
+            background: #e0e0e0;
+            border-radius: 50%;
+            margin-left: 8px;
+            position: relative;
+        }
+        
+        .level-dot.filled {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .skill-list {
+            list-style-type: none;
+        }
+        
+        .skill-list li {
+            padding: 10px 0;
+            border-bottom: 1px dashed #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+        
+        .skill-list li:hover {
+            color: var(--primary);
+            padding-right: 8px;
+        }
+        
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 30px;
+            margin-top: 25px;
+        }
+        
+        .project-card {
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            background: white;
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-header {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0,0,0,0.05), transparent);
+        }
+        
+        .project-body {
+            padding: 25px;
+            position: relative;
+        }
+        
+        .project-body h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .project-body p {
+            color: #555;
+            margin-bottom: 20px;
+            min-height: 90px;
+            line-height: 1.8;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .tech-tag {
+            background: rgba(26, 35, 126, 0.08);
+            color: var(--primary);
+            padding: 7px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(26, 35, 126, 0.15);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            text-align: center;
+            margin-top: 10px;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.05rem;
+        }
+        
+        .btn-download {
+            background: linear-gradient(135deg, var(--success), #00b248);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 200, 83, 0.3);
+        }
+        
+        .btn-download:hover {
+            background: linear-gradient(135deg, #00b248, #009933);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 200, 83, 0.4);
+        }
+        
+        .website-link {
+            text-align: center;
+            margin: 50px 0 30px;
+        }
+        
+        .website-link a {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.3rem;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 16px 40px;
+            background: white;
+            border-radius: 50px;
+            transition: var(--transition);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(26, 35, 126, 0.1);
+            font-weight: 600;
+        }
+        
+        .website-link a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            background: var(--primary);
+            color: white;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+        
+        .achievement-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), #e91e63);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            margin: 8px;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(255, 64, 129, 0.3);
+            transition: var(--transition);
+        }
+        
+        .achievement-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(255, 64, 129, 0.4);
+        }
+        
+        .year-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, var(--accent), #e91e63);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 3;
+        }
+        
+        @media (max-width: 768px) {
+            .skills-grid, .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .title {
+                font-size: 1.3rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+        }
+        
+        /* Animation Effects */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="year-badge">2025</div>
+            <div class="header-content">
+                <h1>رزومه حرفه‌ای</h1>
+                <div class="title">تریدر حرفه‌ای | برنامه‌نویس | مخترع | کارآفرین</div>
+                <div class="bio">
+                    با بیش از سه سال تجربه در حوزه‌های متنوع فنی، مالی و بدنی. ترکیبی نادر از مهارت‌های برنامه‌نویسی پیشرفته، ترید حرفه‌ای، مهندسی خلاق و توانایی‌های ورزشی در سطح بالا. متخصص در تبدیل ایده‌های پیچیده به محصولات عملی با رویکردی سیستماتیک و حل‌مسئله محور.
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>ramatate134@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <span>https://rama-company.github.io/website</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="section-title">
+                <i class="fas fa-laptop-code"></i>
+                <h2>مهارت‌های تخصصی</h2>
+            </div>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> برنامه‌نویسی</h3>
+                    <div class="skill-level">
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                    </div>
+                    <ul class="skill-list">
+                        <li>توسعه اکسپرت/اندیکاتور ترید (MQL5)</li>
+                        <li>ساخت API متصل به هوش مصنوعی</li>
+                        <li>ربات تشخیص ترند 12h با پایتون</li>
+                        <li>تشخیص اشیاء متحرک با پایتون</li>
+                        <li>تبدیل متن به صوت حرفه‌ای</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-chart-line"></i> ترید حرفه‌ای</h3>
+                    <div class="skill-level">
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot"></div>
+                    </div>
+                    <ul class="skill-list">
+                        <li>پاس پراپ 200K (2 بار!)</li>
+                        <li>استراتژی ترکیبی RSI + پرایس‌اکشن</li>
+                        <li>تحلیل حمایت/مقاومت بلادرنگ</li>
+                        <li>مدیریت ریسک با ضریب ۱:۳</li>
+                        <li>ترید در بازارهای جهانی</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-robot"></i> اتوماسیون و هوش مصنوعی</h3>
+                    <div class="skill-level">
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                    </div>
+                    <ul class="skill-list">
+                        <li>ساخت پکیج تولید محتوا</li>
+                        <li>ربات تشخیص اشیاء متحرک</li>
+                        <li>سیستم‌های تبدیل متن به صوت</li>
+                        <li>ربات تشخیص ترند محتوا</li>
+                        <li>مدل‌های زبانی هوش مصنوعی</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-cogs"></i> مهندسی خلاق</h3>
+                    <div class="skill-level">
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot"></div>
+                    </div>
+                    <ul class="skill-list">
+                        <li>طراحی ماشین ۶ چرخ شوکر</li>
+                        <li>ژنراتور برق دوچرخه (تبدیل حرکت به 12V)</li>
+                        <li>گیربکس پلاستیک با ضریب ۱:۱۲</li>
+                        <li>پنکه با پنل خورشیدی</li>
+                        <li>سیستم روشنایی دوچرخه</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-paint-brush"></i> تولید محتوا و رسانه</h3>
+                    <div class="skill-level">
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot"></div>
+                        <div class="level-dot"></div>
+                    </div>
+                    <ul class="skill-list">
+                        <li>نشر کتاب الکترونیک The Road to Success</li>
+                        <li>تاسیس اکانت آپارات با 1000+ فالوور</li>
+                        <li>کسب 2000+ بازدید در تیک‌تاک (1 هفته)</li>
+                        <li>پکیج ایده‌پردازی محتوا</li>
+                        <li>ساخت پاورپوینت‌های حرفه‌ای</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-dumbbell"></i> ورزش و تناسب اندام</h3>
+                    <div class="skill-level">
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot"></div>
+                    </div>
+                    <ul class="skill-list">
+                        <li>بوکس (ناک‌اوت/ناک‌دان حرفه‌ای)</li>
+                        <li>ژیمناستیک پیشرفته</li>
+                        <li>شنا در سطح رقابتی</li>
+                        <li>بارفیکس معکوس کامل</li>
+                        <li>انجام حرکات قدرت بدنی پیچیده</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-title">
+                <i class="fas fa-code"></i>
+                <h2>پروژه‌های کامپیوتری</h2>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>سیستم ترید هوشمند</h3>
+                        <i class="fas fa-chart-line floating"></i>
+                    </div>
+                    <div class="project-body">
+                        <h4>اکسپرت‌ها و اندیکاتورهای سفارشی</h4>
+                        <p>توسعه مجموعه‌ای از اکسپرت‌ها و اندیکاتورهای ترید با استفاده از PineScript که ترکیبی از استراتژی‌های RSI، پرایس‌اکشن و تحلیل حمایت/مقاومت را پیاده‌سازی می‌کنند.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Pine Script</span>
+                            <span class="tech-tag">MetaTrader</span>
+                            <span class="tech-tag">فنی مالی</span>
+                        </div>
+                        <a href="S.S.SR-X.rar"><button class="btn btn-download"><i class="fas fa-download"></i> دانلود نمونه کد</button></a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>پلتفرم تولید محتوا</h3>
+                        <i class="fas fa-robot floating"></i>
+                    </div>
+                    <div class="project-body">
+                        <h4>پکیج ایده‌پردازی هوشمند</h4>
+                        <p>سیستمی یکپارچه برای تولیدکنندگان محتوا که شامل ژنراتور کپشن، پیشنهاد موسیقی، قالب پست و استوری، و پیشنهاد هشتگ‌های بهینه می‌شود.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">هوش مصنوعی</span>
+                            <span class="tech-tag">NLP</span>
+                        </div>
+                        <a href="demo.pdf"><button class="btn btn-download"><i class="fas fa-download"></i> دانلود دمو</button></a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>پیش‌بینی ترند محتوا</h3>
+                        <i class="fas fa-brain floating"></i>
+                    </div>
+                    <div class="project-body">
+                        <h4>ربات تشخیص ترند 12 ساعته</h4>
+                        <p>ربات هوشمندی که با تحلیل شبکه‌های اجتماعی و داده‌های زنده، ترندهای 12 ساعت آینده را برای تولیدکنندگان محتوا پیش‌بینی می‌کند.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">API</span>
+                            <span class="tech-tag">تحلیل داده</span>
+                        </div>
+                        <button class="btn btn-download"><i class="fas fa-download"></i>دانلود در دسترس نیست</button>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>بینایی کامپیوتری</h3>
+                        <i class="fas fa-eye floating"></i>
+                    </div>
+                    <div class="project-body">
+                        <h4>سیستم تشخیص اشیاء متحرک</h4>
+                        <p>پروژه پایتونی برای تشخیص و ردیابی اشیاء متحرک در ویدیوهای زنده با قابلیت آنالیز الگوهای حرکتی و ایجاد هشدار.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">OpenCV</span>
+                            <span class="tech-tag">پردازش تصویر</span>
+                        </div>
+                         <a href="MOVEMENT-DETECTION-MAX.rar"> <button class="btn btn-download"><i class="fas fa-download"></i>دانلود کد منبع</button></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-title">
+                <i class="fas fa-trophy"></i>
+                <h2>دستاوردهای کلیدی</h2>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <span class="achievement-badge">پاس پراپ 200K (2 بار)</span>
+                <span class="achievement-badge">توسعه 15+ بیزینس</span>
+                <span class="achievement-badge">ساخت 20+ اکسپرت ترید</span>
+                <span class="achievement-badge">1000+ فالوور آپارات</span>
+                <span class="achievement-badge">2000+ بازدید تیک‌تاک در 1 هفته</span>
+                <span class="achievement-badge">نشر کتاب الکترونیک</span>
+                <span class="achievement-badge">اختراعات مهندسی</span>
+                <span class="achievement-badge">ساخت پنل خورشیدی</span>
+                <span class="achievement-badge">ساخت ماشین 6 چرخ شوکر</span>
+            </div>
+        </section>
+        
+        <div class="website-link">
+            <a href="index.html" target="_blank">
+                <i class="fas fa-external-link-alt"></i>
+                مشاهده وبسایت شخصی و پروژه‌های بیشتر
+            </a>
+        </div>
+        
+        <footer>
+            <p>© 2025 پورتفولیوی حرفه‌ای | تمامی حقوق محفوظ است</p>
+            <p>ایمیل: ramatate134@gmail.com</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add animation to achievement badges
+        document.querySelectorAll('.achievement-badge').forEach(badge => {
+            badge.addEventListener('mouseenter', () => {
+                badge.style.transform = 'translateY(-5px)';
+            });
+            badge.addEventListener('mouseleave', () => {
+                badge.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Add hover effect to project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('.floating');
+                if (icon) {
+                    icon.style.animation = 'float 2s ease-in-out infinite';
+                }
+            });
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('.floating');
+                if (icon) {
+                    icon.style.animation = 'float 4s ease-in-out infinite';
+                }
+            });
+        });
+        
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
